@@ -201,6 +201,11 @@ body {
     margin: 0;
 }
 
+/* Hide desktop banner wrapper on mobile */
+.social-proof-banner-wrapper {
+    display: none;
+}
+
 /* Mobile: show banner in header */
 .pricing-header .social-proof-banner {
     display: inline-block;
@@ -551,5 +556,119 @@ body {
 
     .price-each span {
         font-size: 28px;
+    }
+}
+
+/* Guarantee Section (100% Refund Policy) */
+.guarantee-section {
+    width: 100%;
+    padding: var(--space-3);
+}
+
+.guarantee-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.guarantee-box {
+    background-color: var(--brand-yellow);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.guarantee-top {
+    background-color: var(--brand-yellow);
+    padding: var(--space-3);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.guarantee-badge {
+    flex-shrink: 0;
+}
+
+.badge-image {
+    width: 100px;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+    /* If background is transparent, yellow background will show through */
+}
+
+.guarantee-text {
+    flex: 1;
+    text-align: left;
+}
+
+.guarantee-title {
+    font-size: clamp(24px, 5vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    color: #000000;
+    margin: 0 0 var(--space-xs) 0;
+}
+
+.guarantee-subtitle {
+    font-size: clamp(18px, 4vw, 24px);
+    font-weight: 700;
+    line-height: 1.2;
+    color: #000000;
+    margin: 0 0 var(--space-xs) 0;
+}
+
+.guarantee-label {
+    font-size: clamp(18px, 4vw, 24px);
+    font-weight: 700;
+    line-height: 1.2;
+    color: #000000;
+    margin: 0;
+}
+
+.guarantee-bottom {
+    background-color: var(--ui-bg-soft);
+    padding: var(--space-3);
+}
+
+.guarantee-description {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #000000;
+    margin: 0;
+    text-align: left;
+}
+
+/* Desktop Styles for Guarantee Section */
+@media (min-width: 960px) {
+    .guarantee-section {
+        padding: var(--space-4);
+    }
+
+    .guarantee-box {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+    }
+
+    .guarantee-top {
+        flex: 1;
+        padding: var(--space-4);
+        gap: var(--space-3);
+    }
+
+    .badge-image {
+        width: 120px;
+    }
+
+    .guarantee-bottom {
+        flex: 1;
+        padding: var(--space-4);
+        display: flex;
+        align-items: center;
+    }
+
+    .guarantee-description {
+        font-size: 16px;
     }
 }
