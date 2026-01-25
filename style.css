@@ -39,15 +39,17 @@ body {
 .pricing-container {
     max-width: 1200px;
     margin: 0 auto;
+    position: relative;
 }
 
 .pricing-header {
     text-align: center;
     margin-bottom: var(--space-3);
+    position: relative;
 }
 
 .pricing-title {
-    font-size: clamp(28px, 5vw, 36px);
+    font-size: clamp(28px, 5vw, 40px);
     font-weight: 700;
     line-height: 1.1;
     color: #000000;
@@ -68,6 +70,9 @@ body {
     font-size: 14px;
     color: #000000;
     position: relative;
+    margin-bottom: var(--space-1);
+    font-size: bold 16px;
+    font-weight: 700;
 }
 
 .social-proof-banner::after {
@@ -83,6 +88,7 @@ body {
     border-top: 8px solid var(--ui-bg-soft);
 }
 
+
 /* Pricing Cards */
 .pricing-cards {
     display: flex;
@@ -96,8 +102,9 @@ body {
     border-radius: 12px;
     padding: 0;
     overflow: hidden;
-    display: grid;
-    grid-template-rows: auto auto auto;
+    display: flex;
+    flex-direction: column;
+    height: auto;
 }
 
 /* Card Headers */
@@ -143,7 +150,7 @@ body {
 }
 
 .plan-offer-title {
-    font-size: clamp(26px, 5vw, 40px);
+    font-size: clamp(26px, 5vw, 36px);
     font-weight: 700;
     line-height: 1.2;
     color: #000000;
@@ -162,13 +169,20 @@ body {
 .card-products {
     padding: var(--space-3);
     text-align: center;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .product-image {
     max-width: 100%;
     height: auto;
+    width: auto;
     display: block;
     margin: 0 auto;
+    object-fit: contain;
+    aspect-ratio: auto;
 }
 
 /* Impact Statement */
@@ -180,16 +194,32 @@ body {
     border-radius: 16px;
 }
 
+
 .impact-statement p {
     font-size: 14px;
     color: #000000;
     margin: 0;
 }
 
+/* Mobile: show banner in header */
+.pricing-header .social-proof-banner {
+    display: inline-block;
+}
+
 /* Card Pricing */
 .card-pricing {
     padding: var(--space-3);
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-shrink: 0;
+}
+
+/* Spacer before CTA button (for desktop grid) */
+.pricing-card::before {
+    content: '';
+    display: none;
 }
 
 .supply-days {
@@ -292,20 +322,234 @@ body {
     font-size: 16px;
 }
 
+/* Placeholder benefits for Basic card alignment */
+.placeholder-benefits {
+    opacity: 0;
+    pointer-events: none;
+}
+
 /* Desktop Styles */
 @media (min-width: 1200px) {
     .pricing-section {
         padding: var(--space-4);
     }
 
+    /* Subtitle: hide br on desktop */
+    .pricing-subtitle .subtitle-break {
+        display: none;
+    }
+
+    .pricing-header {
+        margin-bottom: var(--space-4);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Hide banner in header on desktop */
+    .pricing-header .social-proof-banner {
+        display: none;
+    }
+
+    /* Banner: above Best Value card via grid */
+    .social-proof-banner-wrapper {
+        display: block;
+        grid-column: 3;
+        position: relative;
+        height: 0;
+        margin-bottom: var(--space-2);
+    }
+
+    .social-proof-banner-wrapper .social-proof-banner {
+        position: absolute;
+        top: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 0;
+        white-space: nowrap;
+        z-index: 10;
+    }
+
     .pricing-cards {
-        flex-direction: row;
-        justify-content: center;
-        align-items: flex-start;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: var(--space-4);
+        align-items: stretch;
     }
 
     .pricing-card {
-        flex: 1;
-        max-width: 350px;
+        min-width: 0;
+        height: 100%;
+        display: grid;
+        grid-template-rows: auto auto auto auto auto 1fr auto auto;
+        max-width: none;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        width: 100%;
+    }
+
+    /* Spacer before CTA button */
+    .pricing-card::before {
+        content: '';
+        display: block;
+        grid-row: 6;
+    }
+
+    .pricing-card .card-header {
+        grid-row: 1;
+    }
+
+    .pricing-card .card-offer {
+        grid-row: 2;
+    }
+
+    .pricing-card .card-products {
+        grid-row: 3;
+        height: auto;
+        min-height: 0;
+    }
+
+    .pricing-card .impact-statement {
+        grid-row: 4;
+    }
+
+    .pricing-card .card-pricing {
+        grid-row: 5;
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        flex-grow: 0;
+    }
+
+    .pricing-card .cta-button {
+        grid-row: 7;
+    }
+
+    .pricing-card .additional-benefits {
+        grid-row: 8;
+    }
+
+    /* Desktop order: Basic → Most Popular → Best Value */
+    .pricing-card.basic {
+        order: 1;
+        grid-column: 1;
+    }
+
+    .pricing-card.most-popular {
+        order: 2;
+        grid-column: 2;
+    }
+
+    .pricing-card.best-value {
+        order: 3;
+        grid-column: 3;
+    }
+
+    /* Card offer: consistent height */
+    .card-offer {
+        min-height: 80px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+    }
+
+    /* Impact statement: fix right padding */
+    .impact-statement {
+        margin-right: var(--space-3);
+        margin-left: var(--space-3);
+    }
+
+    /* Card pricing: tighten vertical spacing */
+    .card-pricing {
+        padding: var(--space-2) var(--space-3);
+    }
+
+    .supply-days {
+        margin-bottom: var(--space-1);
+    }
+
+    .price-total {
+        margin-bottom: var(--space-xs);
+    }
+
+    .price-each {
+        margin: var(--space-xs) 0;
+    }
+
+    .price-save {
+        margin-top: var(--space-xs);
+    }
+
+    /* CTA button: prevent wrapping */
+    .cta-button {
+        white-space: nowrap;
+        margin-top: 0;
+    }
+
+    /* Ensure images don't stretch */
+    .product-image {
+        max-height: 280px;
+        max-width: 100%;
+        height: auto;
+        width: auto;
+        object-fit: contain;
+        aspect-ratio: auto;
+    }
+
+    .card-products {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 0;
+        height: auto;
+        padding: var(--space-3);
+    }
+
+    /* Prevent line breaks on desktop */
+    .impact-statement p {
+        white-space: nowrap;
+        font-weight: 700;
+    }
+
+    .price-total {
+        white-space: nowrap;
+    }
+
+    .price-each {
+        white-space: nowrap;
+    }
+
+    .price-save {
+        white-space: nowrap;
+    }
+
+    .supply-days {
+        white-space: nowrap;
+    }
+
+    .plan-offer-title {
+        white-space: nowrap;
+        font-size: 28px !important; /* Override clamp */
+    }
+
+    .card-offer p {
+        white-space: nowrap;
+    }
+
+    /* Typography: reduce font sizes on desktop */
+    .plan-label {
+        font-size: 28px;
+    }
+
+    .supply-days {
+        font-size: 28px;
+    }
+
+    .price-each {
+        font-size: 28px;
+    }
+
+    .price-each span {
+        font-size: 28px;
     }
 }
