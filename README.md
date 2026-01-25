@@ -23,5 +23,5 @@ This page is built with mobile-first performance in mind.
 Google PageSpeed (mobile) is prioritised.
 
 ## Notes
-- Images are served via external URLs to keep the repository lightweight.
+- Images are served via Cloudinary CDN and are not stored in this repository to keep performance optimal.
 - No additional UI features or redesigns are introduced.
