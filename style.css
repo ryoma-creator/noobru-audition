@@ -640,43 +640,150 @@ body {
 }
 
 /* Desktop Styles for Guarantee Section */
-@media (min-width: 960px) {
+/* 【GUARDRAILS】既存モバイルCSS/HTMLは絶対に変更禁止。追加CSSは @media(min-width:1024px) 内のみ。変更はこのセクションに限定。 */
+@media (min-width: 1024px) {
     .guarantee-section {
-        padding: var(--space-4);
+        padding: var(--space-xs);
     }
 
-    .guarantee-box {
-        display: flex;
-        flex-direction: row;
+    .guarantee-container {
+        max-width: 860px;
+    }
+
+    /* 横長カードレイアウト - gridで実装 */
+    .guarantee-section .guarantee-container .guarantee-box {
+        display: block !important;
         align-items: stretch;
+        background-color: var(--ui-bg-soft) !important; /* 左側の濃い黄色をデフォルトに */
+        position: relative;
+        overflow: hidden; /* 角丸を維持 */
     }
 
-    .guarantee-top {
-        flex: 1;
-        padding: var(--space-4);
-        gap: var(--space-3);
+    /* 右側の薄い黄色背景を疑似要素で実現（ロゴの中心位置で切り替え） */
+    .guarantee-section .guarantee-container .guarantee-box::before {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        left: calc(var(--space-4) + 50px); /* ロゴの中心位置から右側を薄い黄色に */
+        background-color: var(--brand-yellow) !important; /* 薄い黄色 */
+        z-index: 0;
+        border-radius: 0 12px 12px 0;
+    }
+
+    /* guarantee-top: 左側エリア（ロゴと見出しを近い位置にまとめる） */
+    .guarantee-section .guarantee-container .guarantee-box .guarantee-top {
+        position: relative;
+        z-index: 1;
+        padding: var(--space-xs) !important; /* モバイルの var(--space-3) を上書き */
+        display: flex !important; /* モバイルでもflexだが、明示的に指定 */
+        align-items: center;
+        gap: var(--space-3) !important; /* モバイルの var(--space-2) を上書き */
+        background-color: transparent !important; /* モバイルの var(--brand-yellow) を上書き */
+    }
+
+    /* バッジを左寄りに配置 */
+    .guarantee-badge {
+        flex-shrink: 0;
+        position: relative;
+        z-index: 2;
     }
 
     .badge-image {
-        width: 120px;
+        width: 170px; /* デスクトップ用のサイズ */
+        height: auto;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
     }
 
-    .guarantee-bottom {
+    /* テキストエリア */
+    .guarantee-text {
         flex: 1;
-        padding: var(--space-4);
-        display: flex;
-        align-items: center;
+        display: flex !important;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        position: relative;
+        z-index: 1;
+    }
+
+    /* 見出し: font-weight 800 */
+    .guarantee-title {
+        font-size: 32px;
+        font-weight: 800;
+        line-height: 1.2;
+        margin: 0 0 0 0;
+        display: block;
+    }
+
+    /* subtitle: デスクトップでは改行なしで1行表示 */
+    .guarantee-subtitle {
+        font-size: 32px;
+        font-weight: 500;
+        line-height: 1.2;
+        margin: 0 !important; /* ← これを変更（例: margin: 0 0 var(--space-xs) 0 !important;） */
+    }
+
+    /* デスクトップではbrタグを非表示にして1行に */
+    .guarantee-br {
+        display: none;
+    }
+
+    /* guarantee-bottom: 右側エリア（説明文）- guarantee-textと同じ右カラムに配置 */
+    .guarantee-section .guarantee-container .guarantee-box .guarantee-bottom {
+        padding: 0 var(--space-4) var(--space-4) !important; /* 上paddingを0に、左右下は維持 */
+        padding-left: var(--space-xs) !important; /* guarantee-topと同じpadding-left */
+        display: block !important;
+        background-color: transparent !important; /* モバイルの var(--ui-bg-soft) を上書き */
+        margin-left: calc(170px + var(--space-3)) !important; /* guarantee-textと同じ位置に（padding-leftは別途設定） */
+        position: relative;
+        z-index: 1;
     }
 
     .guarantee-description {
         font-size: 16px;
+        line-height: 1.6;
+        margin: 0;
+        text-align: left;
+        max-width: 53ch; /* 右側に寄せすぎず、適切な最大幅 */
+    }
+
+    /* ===== Gridレイアウトでロゴ左＋文章右（2段）に再配置 ===== */
+    /* 1) 親を2カラムgridにする */
+    .guarantee-section .guarantee-container .guarantee-box {
+        display: grid !important;
+        grid-template-columns: 170px 1fr !important; /* 左=ロゴ / 右=文章 */
+        column-gap: var(--space-3);
+        row-gap: var(--space-xs);
+        align-items: center !important; /* バッジをy軸中央に */
+        padding: var(--space-2) !important; /* 全体のpadding */
+    }
+
+    /* 2) guarantee-top を "中身だけ" gridに参加させる */
+    .guarantee-section .guarantee-container .guarantee-box .guarantee-top {
+        display: contents !important; /* ラッパーを無効化 */
+    }
+
+    /* 3) ロゴを左列で2段分使う（y軸中央配置） */
+    .guarantee-section .guarantee-container .guarantee-box .guarantee-badge {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+        align-self: center; /* y軸中央 */
+    }
+
+    /* 4) top文章を右上 */
+    .guarantee-section .guarantee-container .guarantee-box .guarantee-text {
+        grid-column: 2;
+        grid-row: 1;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* 5) bottom文章を右下 */
+    .guarantee-section .guarantee-container .guarantee-box .guarantee-bottom {
+        grid-column: 2;
+        grid-row: 2;
+        margin: 0 !important; /* 変なズレ防止 */
+        padding: 0 !important; /* 必要なら後で足す */
     }
 }
-
-
-
-
-
-
-
-
