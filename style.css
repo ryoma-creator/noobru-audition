@@ -925,3 +925,57 @@ body {
     background-color: var(--brand-yellow);
     color: #000000;
 }
+
+/* Desktop Styles for Reviews Overview Section */
+@media (min-width: 1024px) {
+    /* ① 上のスペース（Guaranteeとの間） */
+    .reviews-overview-section {
+        padding: var(--space-4);
+        margin-top: var(--space-4);
+    }
+
+    /* 2-column layout: left = overall-rating, right = category-ratings */
+    /* ② 2カラムを縦中央揃え（4.9側も中央にくる） */
+    .reviews-overview-container {
+        max-width: 960px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-4);
+        align-items: center;
+    }
+
+    .reviews-overview-header {
+        grid-column: 1 / -1;
+        max-width: 560px;
+        margin: 0 auto var(--space-xs) auto;
+    }
+
+    .overall-rating {
+        margin-bottom: 0;
+    }
+
+    .category-ratings {
+        margin-bottom: 0;
+    }
+
+    /* ③ ボタンを 155x40 で固定して 6個を中央に並べる */
+    .filter-buttons {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: repeat(6, 155px);
+        justify-content: center;
+        max-width: none;
+        gap: 16px;
+        margin: var(--space-xs) auto 0 auto;
+    }
+
+    .filter-button {
+        min-width: 155px;
+        height: 40px;
+        padding: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
