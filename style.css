@@ -787,3 +787,141 @@ body {
         padding: 0 !important; /* 必要なら後で足す */
     }
 }
+
+/* Reviews Overview Section */
+.reviews-overview-section {
+    width: 100%;
+    padding: var(--space-3);
+}
+
+.reviews-overview-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.reviews-overview-header {
+    text-align: center;
+    margin-bottom: var(--space-3);
+}
+
+.reviews-title {
+    font-size: clamp(28px, 5vw, 40px);
+    font-weight: 700;
+    line-height: 1.1;
+    color: #000000;
+    margin: 0 0 var(--space-xs) 0;
+}
+
+.reviews-subtitle {
+    font-size: clamp(28px, 5vw, 40px);
+    font-weight: 700;
+    color: #000000;
+    margin: 0;
+}
+
+.overall-rating {
+    text-align: center;
+    margin-bottom: var(--space-3);
+}
+
+.rating-number {
+    font-size: clamp(48px, 10vw, 72px);
+    font-weight: 700;
+    line-height: 1;
+    color: #000000;
+    margin: 0 0 var(--space-1) 0;
+}
+
+.rating-stars {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: var(--space-1);
+}
+
+.rating-stars .star {
+    color: var(--brand-yellow);
+    font-size: clamp(24px, 5vw, 32px);
+    line-height: 1;
+}
+
+.review-count {
+    font-size: 14px;
+    color: #000000;
+    margin: 0;
+}
+
+.category-ratings {
+    margin-bottom: var(--space-3);
+}
+
+.category-rating-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.category-rating-item:last-child {
+    border-bottom: none;
+}
+
+.category-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: #000000;
+    flex: 1;
+    text-align: left;
+}
+
+.category-rating-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+}
+
+.category-stars {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.category-stars .star {
+    color: var(--brand-yellow);
+    font-size: 16px;
+    line-height: 1;
+}
+
+.category-score {
+    font-size: 14px;
+    font-weight: 700;
+    color: #000000;
+    min-width: 32px;
+    text-align: right;
+}
+
+.filter-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-1);
+}
+
+.filter-button {
+    padding: var(--space-1) var(--space-2);
+    border: 2px solid var(--brand-yellow);
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: #000000;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    transition: none;
+}
+
+.filter-button.active {
+    background-color: var(--brand-yellow);
+    color: #000000;
+}
