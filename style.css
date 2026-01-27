@@ -991,10 +991,16 @@ body {
     margin: 0 auto;
 }
 
+/* ensure no parent clips */
+.reviews-featured-section,
+.reviews-featured-container,
+.featured-image-wrapper {
+    overflow: visible !important;
+}
+
 /* responsive width (mobile to desktop gradually) */
 .featured-image-wrapper {
     position: relative;
-    overflow: visible;
     width: min(100%, clamp(350px, 60vw, 500px));
     max-width: none;
     margin: 0 auto var(--space-3) auto;
@@ -1031,14 +1037,15 @@ body {
     -webkit-tap-highlight-color: transparent;
 }
 
+/* avoid translateX artifacts */
 .carousel-arrow-left {
-    left: 0;
-    transform: translate(-50%, -50%);
+    left: -22px;
+    transform: translateY(-50%);
 }
 
 .carousel-arrow-right {
-    right: 0;
-    transform: translate(50%, -50%);
+    right: -22px;
+    transform: translateY(-50%);
 }
 
 .arrow-icon {
