@@ -842,7 +842,7 @@ body {
 
 .rating-stars .star {
     color: var(--brand-yellow);
-    font-size: clamp(24px, 5vw, 32px);
+    font-size: clamp(20px, 5vw, 24px);
     line-height: 1;
 }
 
@@ -1154,4 +1154,611 @@ body {
     height: 2px;
     background-color: var(--brand-yellow);
     margin: var(--space-3) auto 0 auto;
+}
+
+/* Desktop Styles for Reviews Featured Section */
+@media (min-width: 1024px) {
+    /* d_04_reviews_featured desktop only */
+    
+    /* A) Content width (image + text) stays like PSD (~1180) */
+    .reviews-featured-container {
+        max-width: clamp(1030px, 82vw, 1180px);
+        margin: 0 auto;
+        position: static; /* not the arrow anchor */
+        display: grid;
+        grid-template-columns: clamp(350px, 34vw, 407px) clamp(450px, 50vw, 594px);
+        gap: clamp(32px, 4vw, 48px);
+        align-items: start;
+        justify-content: center;
+    }
+
+    /* B) Use section as the FRAME (1255) for arrows + divider */
+    .reviews-featured-section {
+        padding: var(--space-1) var(--space-3) var(--space-4) var(--space-3);
+        position: relative; /* anchor arrows */
+        --frame-w: clamp(1100px, 92vw, 1255px);
+    }
+
+    /* 2) Remove wrapper as arrow anchor (still keep layout) */
+    .featured-image-wrapper {
+        position: static; /* IMPORTANT: stop being relative anchor */
+        width: 100%;
+        max-width: clamp(350px, 34vw, 390px);
+        margin: 0;
+    }
+
+    .featured-product-image {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 407 / 402;
+        object-fit: cover;
+        border-radius: 12px;
+    }
+
+    /* C) Arrows: anchor to section frame edges */
+    .carousel-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: clamp(48px, 4.5vw, 55px);
+        height: clamp(48px, 4.5vw, 55px);
+        border-radius: 999px;
+        background: var(--brand-yellow) !important; /* override mobile transparent !important */
+        border: 0;
+        z-index: 50;
+        display: grid;
+        place-items: center;
+        padding: 0;
+        cursor: pointer;
+        box-shadow: none !important;
+        outline: none !important;
+        filter: none !important;
+        appearance: none;
+        -webkit-appearance: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Frame edges: use calc() to place at left/right of the 1255 frame */
+    .carousel-arrow-left {
+        left: calc(50% - (var(--frame-w) / 2));
+    }
+
+    .carousel-arrow-right {
+        right: calc(50% - (var(--frame-w) / 2));
+    }
+
+    /* Desktop: use PNG icons instead of CSS chevron */
+    .carousel-arrow .arrow-icon {
+        display: block !important;
+        width: clamp(48px, 4.5vw, 55px);
+        height: clamp(48px, 4.5vw, 55px);
+        object-fit: contain;
+    }
+
+    /* 右側テキストブロック */
+    .featured-review-content {
+        width: 100%;
+        max-width: clamp(450px, 50vw, 560px);
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .review-title {
+        font-size: clamp(22px, 2vw, 28px);
+        margin-bottom: var(--space-2);
+    }
+
+    .review-stars {
+        margin-bottom: var(--space-1);
+    }
+
+    .review-stars .star {
+        font-size: clamp(12px, 1.5vw, 16px);
+    }
+
+    .review-body {
+        font-size: clamp(15px, 1.3vw, 17px);
+        line-height: 1.6;
+        max-height: none;
+        margin-bottom: var(--space-2);
+    }
+
+    .reviewer-meta {
+        margin-bottom: 0;
+        grid-template-columns: clamp(48px, 2.5vw, 64px) 1fr; /* アバターサイズに応じて調整 */
+        column-gap: clamp(2px, 1.5vw, 4px); /* アバターが大きい時は間隔も広げる */
+        row-gap: 0px; /* "Andrew M"と"Verified Buyer"の間の上下スペース */
+    }
+
+    .reviewer-avatar {
+        width: clamp(48px, 2.5vw, 64px);
+        height: clamp(48px, 2.5vw, 64px);
+    }
+
+    .reviewer-name {
+        font-size: clamp(14px, 1.2vw, 16px);
+    }
+
+    .verified-buyer {
+        font-size: clamp(12px, 1vw, 14px);
+        color: #666666; /* グレイに変更 */
+    }
+
+    .verified-icon {
+        width: clamp(16px, 1.2vw, 20px);
+        height: clamp(16px, 1.2vw, 20px);
+    }
+
+    /* D) Divider: match the same frame width and centered */
+    /* Now outside container, so it doesn't affect container height (arrow Y-center calculation) */
+    .featured-divider {
+        width: clamp(1000px, 60vw, 1260px);
+        margin: var(--space-4) auto 0;
+        height: 4px;  /* ← ここに追加して太さを変更（例: 3px） */
+    }
+}
+
+/* Reviews List Section - Mobile First */
+.reviews-list-section {
+    width: 100%;
+    padding: var(--space-3);
+}
+
+.reviews-list-container {
+    max-width: clamp(350px, 90vw, 500px);
+    margin: 0 auto;
+}
+
+/* Section Header */
+.reviews-list-header {
+    font-size: clamp(16px, 4vw, 20px);
+    font-weight: 700;
+    text-align: center;
+    color: #000000;
+    margin: 0 0 var(--space-2) 0;
+    min-height: clamp(40px, 10vw, 50px);
+    line-height: 1.3;
+}
+
+/* Rating Summary Block - Horizontal Layout */
+.rating-summary {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(8px, 2vw, 12px);
+    margin-bottom: var(--space-3);
+    flex-wrap: nowrap;
+}
+
+.rating-summary .rating-number {
+    font-size: clamp(36px, 8vw, 48px);
+    font-weight: 700;
+    color: #000000;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.rating-stars-summary {
+    display: flex;
+    flex-direction: row;
+    gap: clamp(2px, 0.5vw, 4px);
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.rating-stars-summary .star {
+    color: var(--brand-yellow);
+    font-size: clamp(20px, 4vw, 28px);
+    line-height: 1;
+}
+
+.review-count-text {
+    font-size: clamp(14px, 3vw, 16px);
+    color: #000000;
+    margin: 0;
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+/* Rating Distribution Bars */
+.rating-distribution {
+    width: clamp(230px, 65vw, 350px);
+    min-height: clamp(94px, 25vw, 120px);
+    height: clamp(94px, 25vw, 120px);
+    margin: 0 auto clamp(2.5rem, 3vw, 5rem) auto;
+}
+
+.rating-bar-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(4px, 2vw, 6px);
+    margin-bottom: clamp(6px, 1.5vw, 10px);
+}
+
+.star-label {
+    font-size: clamp(12px, 2.5vw, 14px);
+    color: #6d7673;
+    min-width: clamp(60px, 15vw, 80px);
+}
+
+.bar-container {
+    flex: 1;
+    max-width: clamp(10px, 35vw, 150px);
+    height: clamp(12px, 3vw, 16px);
+    background-color: #e0e0e0;
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+}
+
+.bar-fill {
+    height: 100%;
+    background-color: var(--brand-yellow);
+    border-radius: 2px;
+}
+
+.bar-count {
+    font-size: clamp(11px, 2.5vw, 13px);
+    color: #000000;
+    min-width: clamp(30px, 8vw, 40px);
+    text-align: left;
+}
+
+/* Thumbnail Image Grid */
+.thumbnail-grid {
+    width: clamp(247px, 70vw, 350px);
+    min-height: clamp(97px, 25vw, 120px);
+    height: clamp(97px, 25vw, 120px);
+    margin: 0 auto var(--space-2) auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.thumbnail-gallery-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Write a Review Button */
+.write-review-button {
+    width: min(92vw, clamp(300px, 85vw, 520px));
+    height: clamp(32px, 8vw, 36px);
+    margin: var(--space-3) auto var(--space-3) auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(6px, 1.5vw, 8px);
+    border: 1px solid #d8d8da;
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: #000000;
+    font-size: clamp(14px, 3vw, 16px);
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    box-shadow: clamp(2px, 0.5vw, 3px) clamp(2px, 0.5vw, 3px) clamp(4px, 1vw, 6px) rgba(0, 0, 0, 0.2);
+}
+
+.write-review-icon {
+    width: clamp(14px, 3.5vw, 16px);
+    height: clamp(14px, 3.5vw, 16px);
+    object-fit: contain;
+    display: block;
+    flex-shrink: 0;
+}
+
+/* Reviews List Header Row */
+.reviews-list-header-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto auto;
+    gap: 0;
+    margin-bottom: var(--space-4);
+    width: min(92vw, clamp(320px, 85vw, 520px));
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+.reviews-count-text {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: clamp(10px, 3vw, 16px);
+    font-weight: 700;
+    color: #000000;
+    padding-bottom: var(--space-1);
+}
+
+.reviews-tab-underline {
+    grid-column: 1;
+    grid-row: 2;
+    width: clamp(100px, 20vw, 120px);
+    height: clamp(3px, 0.8vw, 4px);
+    background-color: #000000;
+    margin-top: -3px;
+    position: relative;
+    z-index: 2;
+}
+
+.reviews-header-connector {
+    display: none;
+}
+
+.sort-control {
+    grid-column: 3;
+    grid-row: 2;
+    display: flex;
+    align-items: center;
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+    background-color: #ffffff;
+    cursor: pointer;
+    height: clamp(28px, 7vw, 32px);
+    overflow: visible;
+    align-self: start;
+    margin-top: -1px;
+    position: relative;
+}
+
+.sort-control::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    right: 100%;
+    width: clamp(300px, 30vw, 360px);
+    height: 1px;
+    background-color: #d9d9d9;
+    z-index: 1;
+}
+
+.sort-label {
+    font-size: clamp(12px, 2.5vw, 14px);
+    color: #000000;
+    padding: 0 clamp(10px, 2.5vw, 12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.sort-divider {
+    display: none;
+}
+
+.sort-trigger {
+    width: clamp(16px, 8vw, 24px);
+    height: 100%;
+    border-left: 1px solid #d9d9d9;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    object-fit: contain;
+    padding: clamp(4px, 1vw, 6px);
+    background-color: #f8faf9;
+}
+
+/* Reviews List */
+.reviews-list {
+    margin-bottom: var(--space-xs);
+}
+
+.review-card {
+    width: min(92vw, clamp(320px, 85vw, 520px));
+    margin: 0 auto;
+    padding-bottom: var(--space-2);
+    margin-bottom: var(--space-2);
+    position: relative;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-1);
+    position: relative;
+}
+
+.reviewer-info {
+    display: flex;
+    align-items: flex-start;
+    gap: clamp(8px, 2vw, 12px);
+    flex: 1;
+}
+
+.reviewer-avatar-small {
+    width: clamp(32px, 8vw, 40px);
+    height: clamp(32px, 8vw, 40px);
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.verified-badge {
+    position: absolute;
+    right: clamp(-2px, -0.5vw, -2px);
+    bottom: clamp(-2px, -0.5vw, -2px);
+    width: clamp(16px, 4vw, 18px);
+    height: clamp(16px, 4vw, 18px);
+    border-radius: 999px;
+    object-fit: contain;
+    z-index: 1;
+}
+
+.avatar-initial {
+    font-size: clamp(12px, 3vw, 14px);
+    font-weight: 700;
+    color: #000000;
+}
+
+.reviewer-details {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2px, 0.5vw, 4px);
+    flex: 1;
+}
+
+.reviewer-name-row {
+    display: flex;
+    align-items: center;
+    gap: clamp(6px, 1.5vw, 10px);
+    flex-wrap: wrap;
+}
+
+.reviewer-name-small {
+    font-size: clamp(13px, 3vw, 15px);
+    font-weight: 700;
+    color: #000000;
+    line-height: 1.2;
+}
+
+.verified-label {
+    font-size: clamp(11px, 2.5vw, 12px);
+    color: var(--brand-green);
+    font-weight: 600;
+}
+
+.reviewer-country {
+    display: flex;
+    align-items: center;
+    gap: clamp(4px, 1vw, 6px);
+}
+
+.country-flag {
+    width: clamp(14px, 3.5vw, 16px);
+    height: clamp(10px, 2.5vw, 12px);
+    object-fit: contain;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.country-name {
+    font-size: clamp(11px, 2.5vw, 12px);
+    color: #666666;
+}
+
+.review-date {
+    font-size: clamp(11px, 2.5vw, 12px);
+    color: #666666;
+    text-align: right;
+    margin: 0;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-left: clamp(8px, 2vw, 12px);
+}
+
+.review-rating-title-row {
+    display: flex;
+    align-items: center;
+    gap: clamp(8px, 2vw, 12px);
+    margin-bottom: var(--space-1);
+    flex-wrap: wrap;
+}
+
+.review-rating-small {
+    display: flex;
+    gap: 1px;
+    flex-shrink: 0;
+}
+
+.review-rating-small .star {
+    color: var(--brand-yellow);
+    font-size: clamp(14px, 3vw, 16px);
+    line-height: 1;
+}
+
+.review-title-small {
+    font-size: clamp(15px, 3.5vw, 18px);
+    font-weight: 700;
+    color: #000000;
+    margin: 0;
+    line-height: 1.3;
+    flex: 1;
+    min-width: 0;
+}
+
+.review-text {
+    font-size: clamp(13px, 3vw, 15px);
+    line-height: 1.6;
+    color: #000000;
+    margin: 0 0 var(--space-3) 0;
+}
+
+.review-helpful {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: clamp(8px, 2vw, 12px);
+    margin-top: var(--space-1);
+}
+
+.helpful-text {
+    font-size: clamp(11px, 2.5vw, 12px);
+    color: #666666;
+}
+
+.helpful-buttons {
+    display: flex;
+    align-items: center;
+    gap: clamp(4px, 1vw, 6px);
+}
+
+.helpful-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: clamp(14px, 3.5vw, 16px);
+    height: clamp(14px, 3.5vw, 16px);
+}
+
+.helpful-icon-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.helpful-count {
+    font-size: clamp(11px, 2.5vw, 12px);
+    color: #666666;
+    margin-right: clamp(4px, 1vw, 6px);
+}
+
+.review-divider {
+    width: min(92vw, clamp(310px, 85vw, 520px));
+    height: 1px;
+    background-color: #eeeeee;
+    margin-top: var(--space-2);
+}
+
+.review-card:last-child .review-divider {
+    display: none;
+}
+
+/* Load More Button */
+.load-more-button {
+    width: clamp(138px, 35vw, 160px);
+    height: clamp(43px, 9vw, 50px);
+    margin: 0 auto;
+    display: block;
+    border: none;
+    border-radius: 8px;
+    background-color: #333333;
+    color: #ffffff;
+    font-size: clamp(13px, 3vw, 15px);
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    white-space: nowrap;
 }
