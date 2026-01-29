@@ -1426,6 +1426,11 @@ body {
     display: block;
 }
 
+/* Reviews Vertical Rule (縦線) - Mobileでは非表示 */
+.reviews-vrule {
+    display: none;
+}
+
 /* Write a Review Button */
 .write-review-button {
     width: min(92vw, clamp(300px, 85vw, 520px));
@@ -1761,4 +1766,258 @@ body {
     cursor: pointer;
     text-align: center;
     white-space: nowrap;
+}
+
+/* Desktop Styles for Reviews List Section */
+@media (min-width: 1024px) {
+    /* Reviews List Section - Desktop only */
+    
+    /* 1) セクション全体の幅と配置 - Grid化で4ブロックを1行に */
+    .reviews-list-container {
+        max-width: clamp(1030px, 82vw, 1250px);
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: clamp(180px, 22vw, 250px) 2px clamp(240px, 22vw, 320px) 2px clamp(260px, 22vw, 338px) auto;
+        grid-template-rows: auto auto auto 1fr;
+        column-gap: clamp(12px, 1.5vw, 20px);
+        row-gap: clamp(20px, 2.5vw, 28px);
+        text-align: left;
+    }
+    
+    /* タイトル行：約 w1030 / h44 */
+    .reviews-list-header {
+        grid-column: 1 / -1;
+        width: clamp(900px, 75vw, 1030px);
+        height: clamp(40px, 4vw, 44px);
+        font-size: clamp(28px, 5vw, 40px);
+        margin: 0 auto var(--space-2) auto;
+        text-align: center;
+        white-space: nowrap;
+        font-size: clamp(22px, 3.2vw, 40px); /* 最小値を下げる */
+        letter-spacing: -0.02em;             /* ほんの少し詰める */
+    }
+    
+    /* 2) 上部4ブロックを1行に配置（集計ヘッダー） */
+    .reviews-list-container > .rating-summary {
+        grid-column: 1;
+        grid-row: 2;
+        margin: 0;
+        align-self: start;
+        width: clamp(180px, 22vw, 250px);
+        height: 140px;
+    }
+    
+    .reviews-list-container > .reviews-vrule {
+        grid-column: 2;
+        grid-row: 2;
+        display: block;
+        width: 2px;
+        height: 140px;
+        background-color: #d0d0d0;
+        align-self: center;
+        justify-self: center;
+    }
+    
+    .reviews-list-container > .rating-distribution {
+        grid-column: 3;
+        grid-row: 2;
+        margin: 0;
+        align-self: start;
+        width: clamp(240px, 22vw, 320px);
+        height: 140px;
+    }
+    
+    .reviews-list-container > .reviews-vrule:nth-of-type(2) {
+        grid-column: 4;
+    }
+    
+    .reviews-list-container > .thumbnail-grid {
+        grid-column: 5;
+        grid-row: 2;
+        margin: 0;
+        align-self: start;
+        width: clamp(260px, 22vw, 338px);
+        height: 140px;
+    }
+    
+    .reviews-list-container > .write-review-button {
+        grid-column: 6;
+        grid-row: 2;
+        align-self: start;
+        justify-self: end;
+        margin: 0;
+        margin-left: clamp(12px, 1.5vw, 20px);
+    }
+    
+    /* 3) .rating-summary（左：4.9 + 星 + Based on） - 4.9と星を横並び、Based on...は下 */
+    .rating-summary {
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-template-rows: auto auto;
+        column-gap: clamp(10px, 1.2vw, 14px);
+        row-gap: clamp(6px, .6vw, 10px);
+        align-items: center;
+        justify-content: start;
+        text-align: left;
+        width: auto;
+        max-width: 100%;
+        margin-bottom: 0;
+    }
+    
+    .rating-summary .rating-number {
+        grid-column: 1;
+        grid-row: 1;
+        font-size: clamp(28px, 5vw, 40px);
+        margin: 0;
+        line-height: 1;
+    }
+    
+    .rating-stars-summary {
+        grid-column: 2;
+        grid-row: 1;
+        display: flex;
+        flex-direction: row;
+        gap: clamp(2px, 0.3vw, 4px);
+        justify-content: flex-start;
+        margin: 0;
+        justify-self: start;
+        align-self: center;
+    }
+    
+    .rating-stars-summary .star {
+        font-size: clamp(20px, 2.2vw, 28px);
+    }
+    
+    .review-count-text {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        font-size: clamp(13px, 1.3vw, 16px);
+        color: #6e6e6e;
+        margin: 0;
+        text-align: left;
+    }
+    
+    /* 4) .rating-distribution（中央左：棒グラフ5段） - 幅を固定、高さ140pxで揃える */
+    .rating-distribution {
+        width: clamp(240px, 22vw, 320px);
+        margin: 0;
+        height: 140px;
+        min-height: 140px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    .bar-container {
+        max-width: 50%;
+        width: 50%;
+    }
+    
+    /* rating-bar-row の間隔を狭める */
+    .rating-bar-row {
+        margin-bottom: 4px;
+    }
+    
+    /* 5) .thumbnail-grid（中央右：写真グリッド） - 幅を固定、高さ140pxで揃える */
+    .thumbnail-grid {
+        width: clamp(260px, 22vw, 338px);
+        height: 140px;
+        margin: 0;
+        min-height: 140px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+    
+    .thumbnail-gallery-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+    
+    /* 6) .write-review-button（右端ボタン） - 上寄せ */
+    .write-review-button {
+        width: clamp(150px, 14vw, 180px);
+        height: clamp(42px, 4vw, 50px);
+        margin: 0;
+        padding: 0 clamp(12px, 1.2vw, 16px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: clamp(6px, 0.7vw, 8px);
+        white-space: nowrap;
+    }
+    
+    .write-review-icon {
+        width: clamp(14px, 1.5vw, 16px);
+        height: clamp(14px, 1.5vw, 16px);
+    }
+    
+    /* 7) Reviews header row（Reviews 1176 + Most Recent） - デスクトップでは非表示 */
+    .reviews-list-header-row {
+        display: none;
+    }
+    
+    /* 8) レビューカード（リスト） - フル幅、左寄せ */
+    .reviews-list {
+        grid-column: 1 / -1;
+        grid-row: 3;
+        width: 100%;
+        max-width: clamp(1030px, 82vw, 1240px);
+        margin: 0 auto;
+        margin-top: var(--space-3);
+    }
+    
+    .review-card {
+        width: 100%;
+        max-width: none;
+        margin: 0 auto var(--space-xs) auto;
+        text-align: left;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
+    /* レビューカード内のレイアウト修正 - 左寄せ */
+    .review-rating-title-row {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: clamp(10px, 1.2vw, 14px);
+    }
+    
+    .review-title-small {
+        text-align: left;
+        margin: 0;
+    }
+    
+    .review-text {
+        text-align: left;
+        max-width: none;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    .review-helpful {
+        justify-content: flex-end;
+    }
+    
+    .review-divider {
+        width: 100%;
+        max-width: none;
+    }
+    
+    /* 9) 国旗アイコン - デスクトップではモバイルCSSをそのまま使用（上書きなし） */
+    
+    /* 10) 最後のボタン（Load More Reviews） */
+    .load-more-button {
+        grid-column: 1 / -1;
+        grid-row: 4;
+        width: clamp(160px, 15vw, 180px);
+        height: clamp(50px, 5vw, 57px);
+        font-size: clamp(14px, 1.4vw, 16px);
+        white-space: nowrap;
+        margin: 0 auto 0 auto;
+    }
 }
