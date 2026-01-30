@@ -199,6 +199,7 @@ body {
     font-size: 14px;
     color: #000000;
     margin: 0;
+    font-weight: 500; /* 軽めのボールド */
 }
 
 /* Hide desktop banner wrapper on mobile */
@@ -320,6 +321,13 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     word-spacing: clamp(-0.1em, -0.1vw - 0.05em, -0.05em);  /* 単語間を狭める */
+}
+
+/* Mobile-only Styles for Additional Benefits */
+@media (max-width: 1023.98px) {
+    .additional-benefits {
+        background-color: #fff3d1; /* モバイル用の背景色 */
+    }
 }
 
 .shipping-icon,
@@ -585,7 +593,7 @@ body {
 /* Guarantee Section (100% Refund Policy) */
 .guarantee-section {
     width: 100%;
-    padding: var(--space-3);
+    padding: var(--space-2);
 }
 
 .guarantee-container {
@@ -601,10 +609,12 @@ body {
 
 .guarantee-top {
     background-color: var(--brand-yellow);
-    padding: var(--space-3);
+    padding: var(--space-xs);
     display: flex;
     align-items: center;
     gap: var(--space-2);
+    width: clamp(320px, 90vw, 360px);  /* w360 レスポンシブ */
+    height: clamp(100px, 30vw, 120px); 
 }
 
 .guarantee-badge {
@@ -631,6 +641,7 @@ body {
     line-height: 1.2;
     color: #000000;
     margin: 0 0 var(--space-xs) 0;
+    white-space: nowrap; /* 改行禁止 */
 }
 
 .guarantee-subtitle {
@@ -666,7 +677,7 @@ body {
 /* 【GUARDRAILS】既存モバイルCSS/HTMLは絶対に変更禁止。追加CSSは @media(min-width:1024px) 内のみ。変更はこのセクションに限定。 */
 @media (min-width: 1024px) {
     .guarantee-section {
-        padding: var(--space-xs);
+        padding: var(--space-2) var(--space-xs) var(--space-xs) var(--space-xs);
     }
 
     .guarantee-container {
@@ -732,7 +743,7 @@ body {
 
     /* 見出し: font-weight 800 */
     .guarantee-title {
-        font-size: 32px;
+        font-size: clamp(24px, 5vw, 32px);
         font-weight: 800;
         line-height: 1.2;
         margin: 0 0 0 0;
@@ -1148,7 +1159,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--space-2) 0;
+    padding: var(--space-1) 0;
     border-bottom: 1px solid #e0e0e0;
 }
 
@@ -1207,6 +1218,7 @@ body {
     cursor: pointer;
     text-align: center;
     transition: none;
+    white-space: nowrap
 }
 
 .filter-button.active {
@@ -1271,7 +1283,7 @@ body {
 /* Reviews Featured Section */
 .reviews-featured-section {
     width: 100%;
-    padding: var(--space-3);
+    padding: var(--space-1) var(--space-3) var(--space-xs) var(--space-3);
 }
 
 .reviews-featured-container {
@@ -1327,18 +1339,18 @@ body {
 
 /* avoid translateX artifacts */
 .carousel-arrow-left {
-    left: -22px;
+    left: calc(-1 * clamp(28px, 3vw, 40px) / 2); /* アイコンの幅の半分だけ外側に */
     transform: translateY(-50%);
 }
 
 .carousel-arrow-right {
-    right: -22px;
+    right: calc(-1 * clamp(28px, 3vw, 40px) / 2); /* アイコンの幅の半分だけ外側に */
     transform: translateY(-50%);
 }
 
 .arrow-icon {
-    width: clamp(28px, 3vw, 40px);
-    height: clamp(28px, 3vw, 40px);
+    width: clamp(28px, 4vw, 68px); /* ボタンと同じサイズ */
+    height: clamp(28px, 4vw, 68px); 
     display: block;
     object-fit: contain;
 }
@@ -1375,7 +1387,7 @@ body {
     font-size: clamp(14px, 1.2vw, 16px);
     line-height: 1.6;
     color: #000000;
-    margin: 0 0 var(--space-xs) 0;
+    margin: 0 0 var(--space-2) 0;
     text-align: left;
     max-height: 240px;
     overflow: hidden;
@@ -1384,7 +1396,7 @@ body {
 /* reviewer layout: left avatar, right stacked text */
 .reviewer-meta {
     display: grid;
-    grid-template-columns: 32px 1fr;
+    grid-template-columns: clamp(28px, 4vw, 55px) 1fr; /* avatarのサイズに合わせる（32px→55px） */
     grid-template-rows: auto auto;
     column-gap: 12px;
     row-gap: 2px;
@@ -1395,8 +1407,8 @@ body {
 .reviewer-avatar {
     grid-column: 1;
     grid-row: 1 / span 2;
-    width: 32px;
-    height: 32px;
+    width: clamp(45px, 4vw, 55px); /* 55pxに設定 */
+    height: clamp(45px, 4vw, 55px); /* 55pxに設定 */
     border-radius: 50%;
     overflow: hidden;
     flex-shrink: 0;
@@ -1416,6 +1428,7 @@ body {
     font-weight: 700;
     line-height: 1.2;
     color: #000000;
+    margin-left: clamp(6px, 1vw, 7px);
 }
 
 .verified-buyer {
@@ -1426,6 +1439,7 @@ body {
     gap: var(--space-0);
     font-size: 12px;
     color: #000000;
+    margin-left: clamp(6px, 1vw, 7px);
 }
 
 .verified-icon {
@@ -1437,9 +1451,9 @@ body {
 }
 
 .featured-divider {
-    width: min(100%, clamp(350px, 60vw, 500px));
+    width: 100vw; /* 画面幅いっぱい */
     max-width: none;
-    height: 2px;
+    height: clamp(3px, 0.3vw, 6px);
     background-color: var(--brand-yellow);
     margin: var(--space-3) auto 0 auto;
 }
@@ -1464,7 +1478,7 @@ body {
     .reviews-featured-section {
         padding: var(--space-1) var(--space-3) var(--space-4) var(--space-3);
         position: relative; /* anchor arrows */
-        --frame-w: clamp(1100px, 92vw, 1255px);
+        --frame-w: clamp(1060px, 92vw, 1255px);
     }
 
     /* 2) Remove wrapper as arrow anchor (still keep layout) */
@@ -1491,7 +1505,7 @@ body {
         width: clamp(48px, 4.5vw, 55px);
         height: clamp(48px, 4.5vw, 55px);
         border-radius: 999px;
-        background: var(--brand-yellow) !important; /* override mobile transparent !important */
+        background: transparent !important; /* 背景を透明に */
         border: 0;
         z-index: 50;
         display: grid;
