@@ -65,7 +65,7 @@ body {
 .social-proof-banner {
     background-color: var(--ui-bg-soft);
     border-radius: 8px;
-    padding: var(--space-1) var(--space-2);
+    padding: var(--space-xs) var(--space-2);
     display: inline-block;
     font-size: 14px;
     color: #000000;
@@ -307,24 +307,28 @@ body {
 .additional-benefits {
     background-color: var(--benefits-bg);
     padding: var(--space-1) var(--space-2);
-    margin: var(--space-2) 0 0 0;
+    margin: var(--space-xs) 0 0 0;
     border-radius: 8px;
     text-align: center;
-    font-size: 14px;
+    font-size: clamp(12px, 1.5vw, 14px);
     color: #000000;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: var(--space-1);
+    gap: clamp(0.025rem, 0.25vw + 0.1rem, 0.375rem);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    word-spacing: clamp(-0.1em, -0.1vw - 0.05em, -0.05em);  /* 単語間を狭める */
 }
 
 .shipping-icon,
 .gift-icon {
     flex-shrink: 0;
-    font-size: 16px;
+    width: auto;
+    height: auto;
+    display: inline-block;
+    object-fit: contain;
 }
 
 /* Placeholder benefits for Basic card alignment */
@@ -345,7 +349,7 @@ body {
     }
 
     .pricing-header {
-        margin-bottom: var(--space-4);
+        margin-bottom: var(--space-1);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -384,12 +388,13 @@ body {
 
     .pricing-card {
         min-width: 0;
-        height: 100%;
+        width: clamp(320px, 30vw, 365px);
+        height: clamp(600px, 60vw, 693px);
         display: grid;
         grid-template-rows: auto auto auto auto auto 1fr auto auto;
         max-width: none;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        width: 100%;
+        justify-items: center;
     }
 
     /* Spacer before CTA button */
@@ -401,20 +406,24 @@ body {
 
     .pricing-card .card-header {
         grid-row: 1;
+        width: 100%;
     }
 
     .pricing-card .card-offer {
         grid-row: 2;
+        width: 100%;
     }
 
     .pricing-card .card-products {
         grid-row: 3;
         height: auto;
         min-height: 0;
+        width: 100%;
     }
 
     .pricing-card .impact-statement {
         grid-row: 4;
+        width: 100%;
     }
 
     .pricing-card .card-pricing {
@@ -423,14 +432,20 @@ body {
         flex-direction: column;
         height: auto;
         flex-grow: 0;
+        width: 100%;
+        align-items: center;
     }
 
     .pricing-card .cta-button {
         grid-row: 7;
+        justify-self: center;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .pricing-card .additional-benefits {
         grid-row: 8;
+        width: 100%;
     }
 
     /* Desktop order: Basic → Most Popular → Best Value */
@@ -489,6 +504,14 @@ body {
     .cta-button {
         white-space: nowrap;
         margin-top: 0;
+        margin-left: auto;
+        margin-right: auto;
+        width: clamp(280px, 28vw, 333px);
+        height: clamp(45px, 4.5vw, 52px);
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     /* Ensure images don't stretch */
@@ -507,7 +530,7 @@ body {
         justify-content: center;
         min-height: 0;
         height: auto;
-        padding: var(--space-3);
+        margin-bottom: var(--space-xs);
     }
 
     /* Prevent line breaks on desktop */
@@ -785,6 +808,271 @@ body {
         grid-row: 2;
         margin: 0 !important; /* 変なズレ防止 */
         padding: 0 !important; /* 必要なら後で足す */
+    }
+
+    /* Pricing Cards Desktop Styles */
+    .pricing-section {
+        padding: var(--space-4);
+    }
+
+    /* Subtitle: hide br on desktop */
+    .pricing-subtitle .subtitle-break {
+        display: none;
+    }
+
+    .pricing-header {
+        margin-bottom: var(--space-1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Hide banner in header on desktop */
+    .pricing-header .social-proof-banner {
+        display: none;
+    }
+
+    /* Banner: above Best Value card via grid */
+    .social-proof-banner-wrapper {
+        display: block;
+        grid-column: 3;
+        position: relative;
+        height: 0;
+        margin-bottom: var(--space-xs);
+    }
+
+    .social-proof-banner-wrapper .social-proof-banner {
+        position: absolute;
+        top: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 0;
+        white-space: nowrap;
+        z-index: 10;
+    }
+
+    .pricing-cards {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: var(--space-4);
+        align-items: stretch;
+    }
+
+    .pricing-card {
+        min-width: 0;
+        width: clamp(320px, 30vw, 365px);
+        height: clamp(600px, 60vw, 693px);
+        display: grid;
+        grid-template-rows: auto auto clamp(150px, 15vw, 200px) auto clamp(150px, 15vw, 200px) 1fr auto auto;
+        max-width: none;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        justify-items: center;
+        overflow: hidden;
+    }
+
+    /* Spacer before CTA button */
+    .pricing-card::before {
+        content: '';
+        display: block;
+        grid-row: 6;
+    }
+
+    .pricing-card .card-header {
+        grid-row: 1;
+        width: 100%;
+    }
+
+    .pricing-card .card-offer {
+        grid-row: 2;
+        width: 100%;
+    }
+
+    .pricing-card .card-products {
+        grid-row: 3;
+        height: clamp(150px, 15vw, 230px);
+        min-height: clamp(150px, 15vw, 230px);
+        max-height: clamp(150px, 15vw, 230px);
+        width: 100%;
+        padding-top: var(--space-2);
+        padding-bottom: var(--space-2);
+        padding-left: var(--space-2);
+        padding-right: var(--space-2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+        z-index: 1;
+    }
+
+    .pricing-card .product-image {
+        width: 100%;
+        height: clamp(150px, 15vw, 200px);
+        object-fit: contain;
+        object-position: center;
+        max-width: 100%;
+        position: relative;
+        z-index: 1;
+    }
+
+    .pricing-card .impact-statement {
+        grid-row: 4;
+        width: calc(100% - calc(var(--space-3) * 2));
+        height: auto;
+        min-height: auto;
+        margin-right: var(--space-3);
+        margin-left: var(--space-3);
+        margin-top: var(--space-2);
+        margin-bottom: var(--space-xs);
+        background-color: #FFF9E6;
+        padding: var(--space-xs) var(--space-xs);
+        border-radius: 16px;
+        align-self: center;
+        position: relative;
+        z-index: 2;
+    }
+
+    .pricing-card .card-pricing {
+        grid-row: 5;
+        display: flex;
+        flex-direction: column;
+        height: clamp(150px, 15vw, 200px);
+        min-height: clamp(150px, 15vw, 200px);
+        max-height: clamp(150px, 15vw, 200px);
+        flex-grow: 0;
+        width: 100%;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: var(--space-1);
+        padding-bottom: var(--space-xs);
+        padding-left: var(--space-3);
+        padding-right: var(--space-3);
+        overflow: hidden;
+    }
+
+    .pricing-card .cta-button {
+        grid-row: 7;
+        justify-self: center;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 0;
+        margin-bottom: var(--space-xs);
+        width: clamp(280px, 28vw, 333px);
+        height: clamp(45px, 4.5vw, 52px);
+        min-height: clamp(45px, 4.5vw, 52px);
+        max-height: clamp(45px, 4.5vw, 52px);
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
+    }
+
+    .pricing-card .additional-benefits {
+        grid-row: 8;
+        width: 100%;
+        height: auto;
+        min-height: auto;
+    }
+
+    /* Desktop order: Basic → Most Popular → Best Value */
+    .pricing-card.basic {
+        order: 1;
+        grid-column: 1;
+    }
+
+    .pricing-card.most-popular {
+        order: 2;
+        grid-column: 2;
+    }
+
+    .pricing-card.best-value {
+        order: 3;
+        grid-column: 3;
+    }
+
+    /* Card offer: consistent height */
+    .card-offer {
+        min-height: 80px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+    }
+
+    /* Prevent line breaks on desktop */
+    .impact-statement p {
+        white-space: nowrap;
+        font-weight: 700;
+    }
+
+    .price-total {
+        white-space: nowrap;
+        margin-bottom: var(--space-xs);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--space-1);
+        flex-wrap: nowrap;
+    }
+
+    .price-was {
+        display: inline-block !important;
+        white-space: nowrap !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    .price-each {
+        white-space: nowrap;
+        margin: clamp(0.125rem, 0.15vw + 0.1rem, 0.2rem) 0;  /* 直接clampで指定 */
+        font-size: clamp(20px, 2.5vw, 28px);  /* レスポンシブに */
+    }
+
+    .price-save {
+        white-space: nowrap;
+        margin-top: clamp(0.125rem, 0.15vw + 0.1rem, 0.2rem);  /* 直接clampで指定 */
+        font-size: clamp(14px, 1.8vw, 18px);  /* レスポンシブに */
+        line-height: 1.1;  /* 行間を狭く */
+    }
+
+    .supply-days {
+        white-space: nowrap;
+        margin-bottom: var(--space-xs);
+        margin-top: 0;
+    }
+
+    .plan-offer-title {
+        white-space: nowrap;
+        font-size: 28px !important;
+    }
+
+    .card-offer p {
+        white-space: nowrap;
+    }
+
+    /* Typography: reduce font sizes on desktop */
+    .plan-label {
+        font-size: clamp(18px, 2.5vw, 28px); ;
+    }
+
+    .supply-days {
+        font-size: clamp(18px, 2.5vw, 28px); ;
+    }
+
+    .price-each {
+        font-size: clamp(18px, 2.5vw, 28px); ;
+    }
+
+    .price-each span {
+        font-size: clamp(18px, 2.5vw, 28px); ;
+    }
+
+    /* Icon images */
+    .shipping-icon,
+    .gift-icon {
+        height: clamp(18px, 2vw, 25px);
+        width: auto;
     }
 }
 
